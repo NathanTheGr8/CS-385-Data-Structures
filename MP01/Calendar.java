@@ -62,18 +62,18 @@ public class Calendar {
 	// the event does not exist in the
 	// array and your method should return false. Otherwise, your method should
 	// set the array entry to null.
-	Boolean removeEvent(Event e) {
+	boolean removeEvent(Event e) {
 		int index = findEvent(e);
 		if (index != -1) {
 			events[index] = null;
 			numEvents--;
-			// Need to down shift events above this index
-			for (int i = index + 1; i < MAXEVENTS; i++) {
-				if (events[i] != null) {
-					events[i - 1] = events[i];
-				}
-			}
-			events[MAXEVENTS - 1] = null;
+			// // Need to down shift events above this index
+			// for (int i = index + 1; i < MAXEVENTS; i++) {
+			// if (events[i] != null) {
+			// events[i - 1] = events[i];
+			// }
+			// }
+			// events[MAXEVENTS - 1] = null;
 			return true;
 		} else {
 			return false;
@@ -87,8 +87,6 @@ public class Calendar {
 		for (int i = 0; i < MAXEVENTS; i++) {
 			if (events[i] != null) {
 				System.out.println(events[i]);
-			} else {
-				break;
 			}
 		}
 	}
