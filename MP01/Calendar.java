@@ -1,4 +1,4 @@
-package MP01;
+package mp01;
 
 public class Calendar {
 	static final int MAXEVENTS = 4; // A constant representing the maximum

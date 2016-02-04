@@ -1,4 +1,4 @@
-package MP01;
+package mp01;
 
 public class Event {
 	private Date date;// the date of the event

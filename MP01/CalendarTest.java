@@ -1,4 +1,4 @@
-package MP01;
+package mp01;
 
 /**
  * A test class for testing "Date" "Event", and "Calendar" classes

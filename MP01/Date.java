@@ -1,4 +1,4 @@
-package MP01;
+package mp01;
 
 public class Date implements Comparable<Date> {
 
