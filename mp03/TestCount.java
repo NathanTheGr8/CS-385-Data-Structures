@@ -16,7 +16,7 @@ public class TestCount {
 
 			// Reading data from array.txt and load it into two dimensional
 			// array data
-			Scanner fileIn = new Scanner(new File("src/arrayTest.txt"));
+			Scanner fileIn = new Scanner(new File("src/array.txt"));
 
 			// The first line contains the number of rows and columns
 			int row = fileIn.nextInt();
@@ -33,7 +33,7 @@ public class TestCount {
 
 			// Reading the query.txt file and testing the count method for each
 			// number in the query.txt
-			fileIn = new Scanner(new File("src/queryTest.txt"));
+			fileIn = new Scanner(new File("src/query.txt"));
 			System.out.println("Starting query...");
 
 			// Creating an output file to store the count result

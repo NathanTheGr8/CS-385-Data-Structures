@@ -7,6 +7,8 @@ package mp03;
  *
  */
 public class CountOccurrence {
+	static int[][] rotated;
+	static boolean isRotated = false;
 
 	/**
 	 * This method counts the number of occurrences of query in the array. You
@@ -17,9 +19,11 @@ public class CountOccurrence {
 	 */
 	public static int count(int[][] array, int query) {
 		int count = 0;
-
-		int[][] rotated = rotateArray(array);
-
+		if (!isRotated) {
+			rotated = rotateArray(array);
+			System.out.println("rotated done");
+			isRotated = true;
+		}
 		for (int[] row : rotated) {
 			count = count + countRow(row, query);
 		}
@@ -29,9 +33,9 @@ public class CountOccurrence {
 	private static int countRow(int[] array, int query) {
 		int count = 0;
 		int low = 0;
-		int high = array.length;
+		int high = array.length - 1;
 		int mid = 0;
-		while (low < high) {
+		while (low <= high) {
 			mid = (low + high) / 2;
 			int diff = array[mid] - query;
 			if (diff == 0) {
@@ -44,7 +48,6 @@ public class CountOccurrence {
 				high = mid - 1;
 			}
 		}
-		// System.out.println("The count is: " + count);
 		return 0;
 	}
 
