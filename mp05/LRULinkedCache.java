@@ -15,24 +15,24 @@ public class LRULinkedCache<K, V> {
 	public static void main(String[] args) {
 		LRULinkedCache<Integer, Integer> cache = new LRULinkedCache<Integer, Integer>(4);
 		cache.LRUPut(1, 5);
-		cache.toString();
+		System.out.println(cache.toString());
 		cache.LRUPut(2, 2);
-		cache.toString();
+		System.out.println(cache.toString());
 		cache.LRUPut(3, 7);
-		cache.toString();
+		System.out.println(cache.toString());
 		cache.LRUPut(4, 9);
-		cache.toString();
+		System.out.println(cache.toString());
 		cache.LRUPut(1, 9);
-		cache.toString();
+		System.out.println(cache.toString());
 
 		System.out.println("Get 3 " + cache.LRUGet(3));
-		cache.toString();
+		System.out.println(cache.toString());
 		cache.LRUPut(5, 10);
-		cache.toString();
+		System.out.println(cache.toString());
 		System.out.println("Get 4 " + cache.LRUGet(4));
-		cache.toString();
+		System.out.println(cache.toString());
 		System.out.println("Get 10 " + cache.LRUGet(10));
-		cache.toString();
+		System.out.println(cache.toString());
 	}
 	/*************
 	 * attributes
@@ -165,22 +165,26 @@ public class LRULinkedCache<K, V> {
 		if (found != null) {
 			found.value = value;
 		} else {
-			CacheNode<K, V> newNode = new CacheNode<K, V>(key, value, head, tail);
+			CacheNode<K, V> newNode = new CacheNode<K, V>(key, value, null, null);
 			if (size >= capacity) {
 				removeFirst();
 			}
 			putAtEnd(newNode);
+			size++;
 		}
 	}
 
+	//Doesn't decrement size
 	private void removeFirst() {
-		CacheNode<K, V> temp = head.next;
-		head.next.next.prev = head;
-		head.next = head.next.next;
-		temp.next = null;
-		temp.prev = null;
+		CacheNode<K, V> oldHead = head.next;
+		CacheNode<K, V> newHead = oldHead.next;
+		head.next = newHead;
+		newHead.prev = head;
+		oldHead.next = null;
+		oldHead.prev = null;
 	}
 
+	//Doesn't increment size
 	private void putAtEnd(CacheNode<K, V> newNode) {
 		newNode.next = tail;
 		newNode.prev = tail.prev;
@@ -188,30 +192,26 @@ public class LRULinkedCache<K, V> {
 		tail.prev = newNode;
 	}
 
+	//Returns null if not found
 	private CacheNode<K, V> search(K key) {
 		CacheNode<K, V> curr = head.next;
-		while (curr != null && !curr.key.equals(key)) {
+		while (curr != null && curr.key != null && !curr.key.equals(key)) {
 			curr = curr.next;
 		}
-		return curr;
-
-		//
-		// boolean found = false;
-		// CacheNode<K,V> curr = head.next;
-		// while (!found && curr != null){
-		// if (curr.key == key){
-		// found = true;
-		// }
-		// else {
-		// curr = curr.next;
-		// }
-		// }
-		// if (found){
-		// return curr;
-		// }
-		// else {
-		// return null;
-		// }
+		//Fucking Bryan your code returns the tail!!!!
+		if (curr.equals(tail)){
+			return null;
+		}
+		else
+			return curr;
+	}
+	
+	public void toString2(){
+		CacheNode<K,V> curr = head.next;
+		while(curr != tail){
+			System.out.println("("+curr.key+","+ curr.value+")");
+			curr = curr.next;
+		}
 	}
 
 	/**
