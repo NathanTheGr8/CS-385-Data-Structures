@@ -8,6 +8,25 @@ public class BSTree<T extends Comparable<? super T>> {
 		clear();
 	}
 	
+	public int getHeight(){
+		return getHeight(root,0);
+	}
+	
+    public int getHeight(Node<T> node, int h){
+    	if(node != null){
+    		int left = getHeight(node.leftChild,h+1);
+    		int right = getHeight(node.rightChild,h+1);
+    		
+    		if(left > right){
+    			return left;
+    		}
+    		else {
+    			return right;
+    		}
+    	}
+    	return h;
+	}
+	
 	public void inorderTraversal(){
 		inorderTraversal(root);
 	}

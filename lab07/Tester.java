@@ -15,6 +15,9 @@ public class Tester {
 		btree.postorderTraversal();
 		System.out.println();
 		btree.inorderTraversal();
+		System.out.println();
+		
+		System.out.println(btree.getHeight());
 		
 
 	}
