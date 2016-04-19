@@ -9,11 +9,20 @@ public class Tester {
 		btree.insert(6);
 		btree.insert(1);
 		btree.insert(4);
+		btree.insert(5);
+		btree.insert(5);
+		btree.insert(5);
 		
-		btree.preorderTraversal();
-		System.out.println();
-		btree.postorderTraversal();
-		System.out.println();
+		btree.remove(5);
+		btree.remove(5);
+		btree.remove(5);
+		btree.remove(5);
+		btree.remove(5);
+		
+//		btree.preorderTraversal();
+//		System.out.println();
+//		btree.postorderTraversal();
+//		System.out.println();
 		btree.inorderTraversal();
 		System.out.println();
 		

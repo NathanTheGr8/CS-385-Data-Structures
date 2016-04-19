@@ -34,7 +34,9 @@ public class BSTree<T extends Comparable<? super T>> {
 	private void inorderTraversal(Node<T> node){
 		if(node != null){
 			inorderTraversal(node.leftChild);
-			System.out.println(node.data);
+			for(int count = 0; count < node.count; count++){
+				System.out.println(node.data);
+			}
 			inorderTraversal(node.rightChild);
 		}
 	}
@@ -99,6 +101,66 @@ public class BSTree<T extends Comparable<? super T>> {
 			}
 			return true;
 		}
+	}
+	
+	public boolean remove(T rem){
+		Node<T> parent = null;
+		Node<T> curr = root;
+		while (curr != null){
+			if(rem.compareTo(curr.data) < 0){
+				parent = curr;
+				curr = curr.leftChild;
+			}
+			else if((rem.compareTo(curr.data) > 0)) {
+				parent = curr;
+				curr = curr.rightChild;
+			}
+			else {
+				break;
+			}
+		}
+		
+		if(curr == null){
+			return false;
+		}
+		else if(curr.count > 1){
+			curr.count--;
+		}
+		else {
+			if(curr.leftChild == null){
+				if(parent == null){
+					root = curr.rightChild;
+				}
+				else {
+					if(rem.compareTo(parent.data)<0){
+						parent.leftChild = curr.rightChild;
+					}
+					else {
+						parent.rightChild = curr.rightChild;
+					}
+				}
+			}
+			else {
+				Node<T> parentOfLeftMost = curr;
+				Node<T> leftMost = curr.rightChild;
+				while(leftMost.leftChild != null){
+					parentOfLeftMost = leftMost;
+					leftMost = leftMost.leftChild;
+				}
+				
+				curr.data = leftMost.data;
+				
+				if(parentOfLeftMost.leftChild == leftMost){
+					parentOfLeftMost.leftChild = leftMost.rightChild;
+				}
+				else {
+					parentOfLeftMost.rightChild = leftMost.rightChild;
+				}
+			}
+			
+		}
+		size -=1;
+		return true;
 	}
 	
 	public boolean hasChild(Node<T> curr){
