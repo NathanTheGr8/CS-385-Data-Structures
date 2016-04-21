@@ -35,6 +35,9 @@ public class TwoDTree {
 			TwoDTreeNode current = root;
 			int level = 0;
 			while (current != null) {
+				if (current.xCoordinate == x && current.yCoordinate == y){
+					throw new IllegalArgumentException("can not add duplicate node to tree : ("+x+","+y+")");
+				}
 				if (level % 2 == 0) {// even level
 					if (x < current.xCoordinate) {
 						// left child
@@ -60,7 +63,7 @@ public class TwoDTree {
 			}
 
 			current = new TwoDTreeNode(x, y, null, null);
-			if (level-1 % 2 == 0) {// even level
+			if ((level-1) % 2 == 0) {// even level
 				if (x < parent.xCoordinate) {
 					// left child
 					parent.left = current;
@@ -78,7 +81,7 @@ public class TwoDTree {
 				}
 			}
 		}
- 		levelOrderPrint();
+// 		levelOrderPrint();
 	}
 
 	/**
@@ -116,7 +119,7 @@ public class TwoDTree {
 						// left child
 						parent = current;
 						current = current.left;
-					} else if (x > current.yCoordinate) {
+					} else if (y > current.yCoordinate) {
 						// right child
 						parent = current;
 						current = current.right;

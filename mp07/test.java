@@ -9,11 +9,14 @@ public class test {
 		DTree.add(70,70);
 		DTree.add(50,30);
 		DTree.add(35,45);
+		DTree.add(60,20);
+		
 		
 		System.out.println("Level Order Traversal");
 		DTree.levelOrderPrint();
 		
 		System.out.println("DTree contaion 30,40: "+DTree.contains(30, 40));
-		System.out.println("DTree contaion 0,0: "+DTree.contains(0, 0));
+		System.out.println("DTree contaion 35,45: "+DTree.contains(35, 45));
+		DTree.add(35,45);
 	}
 }
